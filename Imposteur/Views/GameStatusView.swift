@@ -49,7 +49,7 @@ struct GameStatusView: View {
 
             CardView {
                 VStack(spacing: 12) {
-                    PrimaryButton(title: "Lancer le vote", systemImage: "checkmark.seal.fill", roleColor: AppTheme.accent) {
+                    PrimaryButton(title: "Lancer le vote", systemImage: "checkmark.seal.fill", roleColor: AppTheme.accentStart) {
                         vm.beginVote()
                     }
                     PrimaryButton(title: "Recommencer la partie", systemImage: "repeat") {

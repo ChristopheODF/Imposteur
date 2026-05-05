@@ -51,7 +51,7 @@ struct VoteView: View {
                                     .foregroundStyle(.white)
                                 Spacer()
                                 Image(systemName: selected ? "checkmark.circle.fill" : "circle")
-                                    .foregroundStyle(selected ? AppTheme.accent : .white.opacity(0.35))
+                                    .foregroundStyle(selected ? AppTheme.accentStart : .white.opacity(0.35))
                             }
                             .padding(.vertical, 8)
                         }

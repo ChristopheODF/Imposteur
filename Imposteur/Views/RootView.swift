@@ -38,6 +38,6 @@ struct RootView: View {
                 GameOverView()
             }
         }
-        .tint(AppTheme.accent)
+        .tint(AppTheme.accentStart)
     }
 }

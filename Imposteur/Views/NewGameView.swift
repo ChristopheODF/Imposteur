@@ -38,7 +38,7 @@ struct NewGameView: View {
                             Text("Nombre de joueurs (4–20)")
                                 .foregroundStyle(.white.opacity(0.85))
                         }
-                        .tint(AppTheme.accent)
+                        .tint(AppTheme.accentStart)
 
                         Divider().overlay(Color.white.opacity(0.1))
 
