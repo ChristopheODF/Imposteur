@@ -41,6 +41,7 @@ enum GameEngine {
         roles.append(contentsOf: Array(repeating: .imposteur, count: impostors))
         roles.append(contentsOf: Array(repeating: .agentSecret, count: secretAgents))
         roles.shuffle()
+        ensureFirstIsNotSecretAgent(&roles)
 
         return (1...n).enumerated().map { (offset, idx) in
             Player(index: idx, role: roles[offset], name: names[offset])
@@ -83,10 +84,18 @@ enum GameEngine {
         roles.append(contentsOf: Array(repeating: .imposteur, count: impostors))
         roles.append(contentsOf: Array(repeating: .agentSecret, count: secretAgents))
         roles.shuffle()
+        ensureFirstIsNotSecretAgent(&roles)
 
         return (1...n).enumerated().map { (offset, idx) in
             Player(index: idx, role: roles[offset])
         }
+    }
+
+    private static func ensureFirstIsNotSecretAgent(_ roles: inout [Role]) {
+        guard roles.first == .agentSecret,
+              let swapIndex = roles.indices.first(where: { roles[$0] != .agentSecret })
+        else { return }
+        roles.swapAt(0, swapIndex)
     }
 
     static func roleAndWord(for player: Player, state: GameState) -> (roleLabel: String, wordLabel: String) {
