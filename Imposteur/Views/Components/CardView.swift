@@ -25,14 +25,14 @@ struct CardView<Content: View>: View {
                     // gentle color overlay to match app theme
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
                         .fill(LinearGradient(
-                            colors: [AppTheme.accentStart.opacity(0.08), AppTheme.accentEnd.opacity(0.06)],
+                            colors: [AppTheme.accentStart.opacity(0.12), AppTheme.accentEnd.opacity(0.10)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing))
 
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(Color.white.opacity(0.06), lineWidth: 1)
+                        .stroke(Color.white.opacity(0.08), lineWidth: 1)
                 }
             )
-            .shadow(color: Color.black.opacity(0.45), radius: 18, x: 0, y: 10)
+            .shadow(color: Color.black.opacity(0.55), radius: 26, x: 0, y: 14)
     }
 }

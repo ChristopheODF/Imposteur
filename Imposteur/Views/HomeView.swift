@@ -12,12 +12,30 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [AppTheme.bgTop, AppTheme.bgBottom]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            // animated background with subtle floating blobs
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [AppTheme.bgTop, AppTheme.bgBottom]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
+                // decorative soft blobs
+                Circle()
+                    .fill(AppTheme.accentGradient)
+                    .frame(width: 360, height: 360)
+                    .blur(radius: 40)
+                    .offset(x: -90, y: -160)
+                    .opacity(0.12)
+
+                Circle()
+                    .fill(AppTheme.accentGradient)
+                    .frame(width: 260, height: 260)
+                    .blur(radius: 32)
+                    .offset(x: 110, y: -40)
+                    .opacity(0.10)
+            }
 
             VStack(spacing: 18) {
                 Spacer()

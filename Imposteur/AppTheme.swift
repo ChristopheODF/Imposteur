@@ -25,3 +25,16 @@ enum AppTheme {
     static let cardOverlay = Color.white.opacity(0.06)
     static let subtleText = Color.white.opacity(0.75)
 }
+
+extension AppTheme {
+    // Compatibility alias for older usages
+    static var accent: Color { accentStart }
+
+    // Full gradient for heavy backgrounds / buttons
+    static var accentGradient: LinearGradient {
+        LinearGradient(colors: [accentStart, accentEnd], startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+
+    // Slightly stronger overlay used for highlighted cards
+    static var cardOverlayStrong: Color { Color.white.opacity(0.10) }
+}
