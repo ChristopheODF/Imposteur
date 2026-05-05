@@ -11,40 +11,73 @@ struct HomeView: View {
     @EnvironmentObject var vm: AppViewModel
 
     var body: some View {
-        VStack(spacing: 18) {
-            Spacer()
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [AppTheme.bgTop, AppTheme.bgBottom]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
 
-            VStack(spacing: 10) {
-                Text("Imposteur")
-                    .font(.system(size: 44, weight: .heavy, design: .rounded))
-                    .foregroundStyle(.white)
+            VStack(spacing: 18) {
+                Spacer()
 
-                Text("Jeu de rôles cachés · Mots proches · Agent secret")
-                    .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.75))
-                    .multilineTextAlignment(.center)
-            }
+                VStack(spacing: 8) {
+                    AnimatedTitle()
 
-            Spacer()
+                    Text("Jeu de rôles cachés · Mots proches · Agent secret")
+                        .font(.subheadline)
+                        .foregroundStyle(AppTheme.subtleText)
+                        .multilineTextAlignment(.center)
+                }
 
-            CardView {
-                VStack(spacing: 12) {
-                    PrimaryButton(title: "Nouvelle partie", systemImage: "play.fill") {
-                        vm.openNewGame()
-                    }
-                    PrimaryButton(title: "Règles", systemImage: "book.fill", roleColor: .white.opacity(0.18)) {
-                        vm.openRules()
+                Spacer()
+
+                CardView {
+                    VStack(spacing: 14) {
+                        PrimaryButton(title: "Nouvelle partie", systemImage: "play.fill", roleColor: AppTheme.accentStart) {
+                            vm.openNewGame()
+                        }
+                        PrimaryButton(title: "Règles", systemImage: "book.fill", roleColor: AppTheme.accentEnd) {
+                            vm.openRules()
+                        }
                     }
                 }
+                .padding(.horizontal, 18)
+
+                Spacer(minLength: 24)
+
+                Text("Passe le téléphone · Révèle ton rôle · Donne un indice · Vote")
+                    .font(.footnote)
+                    .foregroundStyle(AppTheme.subtleText.opacity(0.85))
             }
-            .padding(.horizontal, 18)
-
-            Spacer(minLength: 24)
-
-            Text("Passe le téléphone · Révèle ton rôle · Donne un indice · Vote")
-                .font(.footnote)
-                .foregroundStyle(.white.opacity(0.55))
+            .padding(.vertical, 24)
         }
-        .padding(.vertical, 24)
+    }
+}
+
+struct AnimatedTitle: View {
+    @State private var animate = false
+
+    var body: some View {
+        ZStack {
+            Text("Imposteur")
+                .font(.system(size: 44, weight: .heavy, design: .rounded))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [AppTheme.accentStart, AppTheme.accentEnd],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .scaleEffect(animate ? 1.02 : 1)
+                .opacity(animate ? 1 : 0.96)
+                .shadow(color: Color.black.opacity(0.35), radius: 16, x: 0, y: 8)
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.6).repeatForever(autoreverses: true)) {
+                animate.toggle()
+            }
+        }
     }
 }

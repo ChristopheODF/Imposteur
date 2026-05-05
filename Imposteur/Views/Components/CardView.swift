@@ -17,12 +17,22 @@ struct CardView<Content: View>: View {
         content
             .padding(18)
             .background(
-                RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .fill(.ultraThinMaterial)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .stroke(Color.white.opacity(0.08), lineWidth: 1)
-                    )
+                ZStack {
+                    // soft blurred material
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(.ultraThinMaterial)
+
+                    // gentle color overlay to match app theme
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .fill(LinearGradient(
+                            colors: [AppTheme.accentStart.opacity(0.08), AppTheme.accentEnd.opacity(0.06)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing))
+
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(Color.white.opacity(0.06), lineWidth: 1)
+                }
             )
+            .shadow(color: Color.black.opacity(0.45), radius: 18, x: 0, y: 10)
     }
 }

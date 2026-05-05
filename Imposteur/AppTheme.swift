@@ -8,11 +8,20 @@
 import SwiftUI
 
 enum AppTheme {
-    static let accent = Color(red: 0.62, green: 0.19, blue: 0.90) // violet
-    static let bgTop = Color(red: 0.09, green: 0.10, blue: 0.16)
-    static let bgBottom = Color(red: 0.04, green: 0.04, blue: 0.07)
+    // Primary accents (gradient pair)
+    static let accentStart = Color(red: 0.56, green: 0.21, blue: 0.95) // vivid violet
+    static let accentEnd = Color(red: 0.14, green: 0.79, blue: 0.80) // teal
 
+    // Background gradient
+    static let bgTop = Color(red: 0.05, green: 0.06, blue: 0.12)
+    static let bgBottom = Color(red: 0.02, green: 0.02, blue: 0.04)
+
+    // Semantic colors
     static let danger = Color(red: 0.92, green: 0.23, blue: 0.29)
     static let success = Color(red: 0.18, green: 0.80, blue: 0.44)
     static let warning = Color(red: 0.98, green: 0.74, blue: 0.22)
+
+    // Subtle UI palette
+    static let cardOverlay = Color.white.opacity(0.06)
+    static let subtleText = Color.white.opacity(0.75)
 }
