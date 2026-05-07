@@ -41,26 +41,26 @@ struct VoteView: View {
                         .font(.headline)
                         .foregroundStyle(.white)
 
-                    ForEach(alivePlayers) { p in
-                        let selected = (vm.state.pendingEliminationPlayerID == p.id)
-                        Button {
-                            vm.setPendingElimination(selected ? nil : p.id)
-                        } label: {
-                            HStack {
-                                Text(p.displayName)
-                                    .foregroundStyle(.white)
-                                    .font(.body)
-                                Spacer()
-                                Image(systemName: selected ? "checkmark.circle.fill" : "circle")
-                                    .foregroundStyle(selected ? AppTheme.accentStart : .white.opacity(0.35))
-                            }
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                    .fill(selected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
-                            )
+                    ForEach(alivePlayers, id: \ .id) { p in
+                        let isSelected = (vm.state.pendingEliminationPlayerID == p.id)
+
+                        HStack {
+                            Text(p.displayName)
+                                .foregroundStyle(.white)
+                                .font(.body)
+                            Spacer()
+                            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                                .foregroundStyle(isSelected ? AppTheme.accentStart : .white.opacity(0.35))
                         }
-                        .buttonStyle(.plain)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
+                        )
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            vm.setPendingElimination(isSelected ? nil : p.id)
+                        }
                         Divider().overlay(Color.white.opacity(0.08))
                     }
                 }
