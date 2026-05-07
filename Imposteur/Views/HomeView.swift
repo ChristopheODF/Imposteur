@@ -38,21 +38,30 @@ struct HomeView: View {
             }
 
             VStack(spacing: 18) {
-                Spacer()
+                Spacer(minLength: 8)
 
-                VStack(spacing: 8) {
+                // Hero illustration: large, animated and prominent
+                HeroIllustration()
+                    .frame(height: 320)
+                    .padding(.horizontal, 12)
+
+                // Title & subtitle grouped on top of hero area
+                VStack(spacing: 6) {
                     AnimatedTitle()
+                        .padding(.top, 6)
 
                     Text("Jeu de rôles cachés · Mots proches · Agent secret")
                         .font(.subheadline)
                         .foregroundStyle(AppTheme.subtleText)
                         .multilineTextAlignment(.center)
                 }
+                .padding(.horizontal, 18)
 
-                Spacer()
+                Spacer(minLength: 6)
 
+                // CTAs in a more compact card
                 CardView {
-                    VStack(spacing: 14) {
+                    VStack(spacing: 12) {
                         PrimaryButton(title: "Nouvelle partie", systemImage: "play.fill", roleColor: AppTheme.accentStart) {
                             vm.openNewGame()
                         }
@@ -60,16 +69,18 @@ struct HomeView: View {
                             vm.openRules()
                         }
                     }
+                    .padding(.vertical, 8)
                 }
-                .padding(.horizontal, 18)
+                .padding(.horizontal, 24)
 
-                Spacer(minLength: 24)
+                Spacer(minLength: 10)
 
                 Text("Passe le téléphone · Révèle ton rôle · Donne un indice · Vote")
                     .font(.footnote)
                     .foregroundStyle(AppTheme.subtleText.opacity(0.85))
+                    .padding(.bottom, 8)
             }
-            .padding(.vertical, 24)
+            .padding(.vertical, 6)
         }
     }
 }
