@@ -51,30 +51,7 @@ struct VoteView: View {
             }
             .padding(.horizontal, 18)
 
-// Small helper subview to keep VoteView body simple for the compiler
-struct PlayerRowView: View {
-    let player: Player
-    let isSelected: Bool
-    let onTap: () -> Void
-
-    var body: some View {
-        HStack {
-            Text(player.displayName)
-                .foregroundStyle(.white)
-                .font(.body)
-            Spacer()
-            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                .foregroundStyle(isSelected ? AppTheme.accentStart : .white.opacity(0.35))
-        }
-        .padding(12)
-        .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
-        )
-        .contentShape(Rectangle())
-        .onTapGesture(perform: onTap)
-    }
-}
+ 
 
             CardView {
                 VStack(spacing: 12) {
@@ -99,5 +76,30 @@ struct PlayerRowView: View {
 
             Spacer(minLength: 10)
         }
+    }
+}
+
+// Small helper subview to keep VoteView body simple for the compiler
+struct PlayerRowView: View {
+    let player: Player
+    let isSelected: Bool
+    let onTap: () -> Void
+
+    var body: some View {
+        HStack {
+            Text(player.displayName)
+                .foregroundStyle(.white)
+                .font(.body)
+            Spacer()
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                .foregroundStyle(isSelected ? AppTheme.accentStart : .white.opacity(0.35))
+        }
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
     }
 }
