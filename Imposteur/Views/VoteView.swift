@@ -97,7 +97,11 @@ struct PlayerRowView: View {
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
+                .fill(
+                    isSelected
+                    ? AnyShapeStyle(AppTheme.accentGradient.opacity(0.12))
+                    : AnyShapeStyle(Color.clear)
+                )
         )
         .contentShape(Rectangle())
         .onTapGesture(perform: onTap)
