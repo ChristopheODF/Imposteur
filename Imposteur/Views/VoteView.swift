@@ -42,30 +42,39 @@ struct VoteView: View {
                         .foregroundStyle(.white)
 
                     ForEach(alivePlayers, id: \ .id) { p in
-                        let isSelected = (vm.state.pendingEliminationPlayerID == p.id)
-
-                        HStack {
-                            Text(p.displayName)
-                                .foregroundStyle(.white)
-                                .font(.body)
-                            Spacer()
-                            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                                .foregroundStyle(isSelected ? AppTheme.accentStart : .white.opacity(0.35))
-                        }
-                        .padding(12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
-                        )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            vm.setPendingElimination(isSelected ? nil : p.id)
+                        PlayerRowView(player: p, isSelected: vm.state.pendingEliminationPlayerID == p.id) {
+                            vm.setPendingElimination(vm.state.pendingEliminationPlayerID == p.id ? nil : p.id)
                         }
                         Divider().overlay(Color.white.opacity(0.08))
                     }
                 }
             }
             .padding(.horizontal, 18)
+
+// Small helper subview to keep VoteView body simple for the compiler
+struct PlayerRowView: View {
+    let player: Player
+    let isSelected: Bool
+    let onTap: () -> Void
+
+    var body: some View {
+        HStack {
+            Text(player.displayName)
+                .foregroundStyle(.white)
+                .font(.body)
+            Spacer()
+            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                .foregroundStyle(isSelected ? AppTheme.accentStart : .white.opacity(0.35))
+        }
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(isSelected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
+    }
+}
 
             CardView {
                 VStack(spacing: 12) {
