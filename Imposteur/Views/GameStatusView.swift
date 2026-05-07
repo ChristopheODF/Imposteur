@@ -18,9 +18,9 @@ struct GameStatusView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Tour \(vm.state.round)")
                         .font(.largeTitle.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.accentGradient)
                     Text("Donnez vos indices, puis votez.")
-                        .foregroundStyle(.white.opacity(0.75))
+                        .foregroundStyle(AppTheme.subtleText.opacity(0.95))
                 }
                 Spacer()
             }

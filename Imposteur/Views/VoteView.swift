@@ -17,7 +17,7 @@ struct VoteView: View {
             HStack {
                 Text("Vote")
                     .font(.largeTitle.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.accentGradient)
                 Spacer()
             }
             .padding(.horizontal, 18)
@@ -49,11 +49,16 @@ struct VoteView: View {
                             HStack {
                                 Text(p.displayName)
                                     .foregroundStyle(.white)
+                                    .font(.body)
                                 Spacer()
                                 Image(systemName: selected ? "checkmark.circle.fill" : "circle")
                                     .foregroundStyle(selected ? AppTheme.accentStart : .white.opacity(0.35))
                             }
-                            .padding(.vertical, 8)
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill(selected ? AppTheme.accentGradient.opacity(0.12) : Color.clear)
+                            )
                         }
                         .buttonStyle(.plain)
                         Divider().overlay(Color.white.opacity(0.08))

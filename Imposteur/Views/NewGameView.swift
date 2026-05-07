@@ -16,7 +16,7 @@ struct NewGameView: View {
                 HStack {
                     Text("Nouvelle partie")
                         .font(.largeTitle.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.accentGradient)
                     Spacer()
                 }
 
@@ -25,7 +25,7 @@ struct NewGameView: View {
 
                         HStack {
                             Text("Joueurs")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(AppTheme.accentGradient)
                                 .font(.headline)
                             Spacer()
                             PillBadge(text: "\(vm.state.config.playerCount)", color: .white)
@@ -44,7 +44,7 @@ struct NewGameView: View {
 
                         HStack {
                             Text("Imposteurs")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(AppTheme.danger)
                                 .font(.headline)
                             Spacer()
                             PillBadge(text: "\(vm.state.config.impostorCount)", color: AppTheme.danger)
@@ -81,7 +81,7 @@ struct NewGameView: View {
 
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Timer de discussion (optionnel)")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(AppTheme.subtleText)
                                 .font(.headline)
 
                             Picker("Timer", selection: vm.turnTimerSelectionBinding) {
