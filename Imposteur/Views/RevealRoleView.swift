@@ -15,9 +15,11 @@ struct RevealRoleView: View {
         let info = GameEngine.roleAndWord(for: player, state: vm.state)
 
         VStack(spacing: 12) {
-            Text(info.roleLabel)
-                .font(.system(size: 30, weight: .heavy, design: .rounded))
-                .foregroundStyle(colorForRole(player.role))
+            if shouldShowRoleLabel {
+                Text(info.roleLabel)
+                    .font(.system(size: 30, weight: .heavy, design: .rounded))
+                    .foregroundStyle(colorForRole(player.role))
+            }
 
             Text(info.wordLabel)
                 .font(.system(size: 42, weight: .heavy, design: .rounded))
@@ -29,6 +31,10 @@ struct RevealRoleView: View {
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private var shouldShowRoleLabel: Bool {
+        player.role == .agentSecret || vm.state.config.showRoleDuringDistribution
     }
 
     private func colorForRole(_ role: Role) -> Color {

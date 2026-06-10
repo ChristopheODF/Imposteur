@@ -79,6 +79,23 @@ struct NewGameView: View {
 
                         Divider().overlay(Color.white.opacity(0.1))
 
+                        Toggle(isOn: Binding(
+                            get: { vm.state.config.showRoleDuringDistribution },
+                            set: { vm.applyShowRoleDuringDistribution($0) }
+                        )) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Afficher le rôle")
+                                    .foregroundStyle(.white)
+                                    .font(.headline)
+                                Text("Indique si vous êtes Équipier ou Imposteur lors de la distribution")
+                                    .foregroundStyle(.white.opacity(0.65))
+                                    .font(.footnote)
+                            }
+                        }
+                        .tint(AppTheme.accent)
+
+                        Divider().overlay(Color.white.opacity(0.1))
+
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Timer de discussion (optionnel)")
                                 .foregroundStyle(.white)
