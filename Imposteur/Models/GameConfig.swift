@@ -11,6 +11,7 @@ struct GameConfig: Equatable, Codable {
     var playerCount: Int = 6
     var impostorCount: Int = 1
     var hasSecretAgent: Bool = true
+    var showRoleDuringDistribution: Bool = true
     /// Timer optionnel par tour (phase de discussion). nil = off
     var turnTimerSeconds: Int? = nil
 

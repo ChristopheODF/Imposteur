@@ -116,6 +116,10 @@ final class AppViewModel: ObservableObject {
         let maxImp = state.config.maxImpostorsAllowed()
         state.config.impostorCount = min(max(state.config.impostorCount, 1), maxImp)
     }
+
+    func applyShowRoleDuringDistribution(_ on: Bool) {
+        state.config.showRoleDuringDistribution = on
+    }
     
     func startGameFromNames() {
         let cfg = GameEngine.validatedConfig(state.config)

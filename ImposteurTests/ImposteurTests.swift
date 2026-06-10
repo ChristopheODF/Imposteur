@@ -41,4 +41,28 @@ struct ImposteurTests {
         }
     }
 
+    @Test func showRoleDuringDistributionDefaultsToTrueAndIsCodable() async throws {
+        let config = GameConfig()
+
+        #expect(config.showRoleDuringDistribution)
+
+        let data = try JSONEncoder().encode(config)
+        let decoded = try JSONDecoder().decode(GameConfig.self, from: data)
+
+        #expect(decoded == config)
+        #expect(decoded.showRoleDuringDistribution)
+    }
+
+    @Test func validatedConfigPreservesShowRoleDuringDistribution() async throws {
+        var config = GameConfig()
+        config.playerCount = 6
+        config.impostorCount = 1
+        config.hasSecretAgent = true
+        config.showRoleDuringDistribution = false
+
+        let validated = GameEngine.validatedConfig(config)
+
+        #expect(!validated.showRoleDuringDistribution)
+    }
+
 }
